@@ -22,7 +22,7 @@ function getRecsCB(userId, cb) {
 function promisify(fn) {
     return function (...args) {
       return new Promise((resolve, reject) => {
-        fn(...args, (err, data) => err ? reject(err) : resolve(data));
+        fn(...args, (err, data) => err ? reject(err) : resolve(data)); //spread [...arr1, 1, 2]; newObj = {...obj, name: 'july'}
       });
     };
 }
@@ -95,7 +95,7 @@ Optional -- Promise.race demo
 ────────────────────────────────────────────────────────────────────────── */
 function runRaceOptional() {
     console.log("— RACE (optional) —");
-    const p1 = new Promise(res => setTimeout(() => res("p1"), 120));
+    const p1 = new Promise(res => setTimeout(() => res("p1"), 20));
     const p2 = new Promise(res => setTimeout(() => res("p2"), 60));
     // TODO:practice  Promise.race return then (winner as console.log("race winner:", winner));
     return Promise.race([p1, p2]).then(winner => console.log("race winner: ", winner));
