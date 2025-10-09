@@ -1,11 +1,13 @@
-import "./App.css";
-import AboutMe from "./AboutMe";
+// import "./App.css";
+import React from "react";
+import CharacterList from "./components/CharacterList";
+// import AboutMe from "./AboutMe";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <AboutMe />
+      <CharacterList />
     </div>
   );
 }

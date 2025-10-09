@@ -1,0 +1,24 @@
+.character-card {
+    background-color: #ffffff;
+    border-radius: 35px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    padding: 15px;
+    width: 250px;
+    text-align:left;
+    transition: transform 0.2s ease;
+}
+
+.character-card:hover {
+    transform: scale(1.05);
+}
+
+.character-card img {
+    width: 100%;
+    border-radius: 30px;
+}
+
+.text-card {
+    color: rgb(130, 129, 129);
+    margin-top: 5px;
+}
