@@ -7,6 +7,8 @@ function CharacterList() {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    // Assignment 4
+    const [searchTerm, setSearchTerm] = useState('');
 
     const fetchCharacters = async () => {
         setLoading(true);
@@ -30,11 +32,27 @@ function CharacterList() {
         }
     };
 
+    // Assignment 4
+    const filteredCharacters = characters.filter((char) =>
+        char.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+
     return (
         <div className="character-list">
-            <h1 style={{ color: 'rgba(84, 84, 84, 1)'}}>Rick and Morty Characters</h1>
+            <h1 style={{ color: 'rgba(84, 84, 84, 1)' }}>Rick and Morty Characters</h1>
+            <div className="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search characters..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    aria-label="Search characters"
+                />
+                <button onClick={() => setSearchTerm('')} className="clear-button" aria-label="Clear search">Clear</button>
+            </div>
             <ul>
-                {characters.map((char) => (
+                {filteredCharacters.map((char) => (
                     <CharacterCard key={char.id} character={char} />
                 ))}
             </ul>
