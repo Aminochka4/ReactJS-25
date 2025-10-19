@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CharacterCard from "./CharacterCard";
 import "./CharacterList.css";
 
@@ -7,7 +7,6 @@ function CharacterList() {
     const [loading, setLoading] = useState(false);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
-    // Assignment 4
     const [searchTerm, setSearchTerm] = useState('');
 
     const fetchCharacters = async () => {
@@ -20,7 +19,7 @@ function CharacterList() {
 
             if (data.results) {
                 setCharacters((prev) => [...prev, ...data.results]);
-                setPage(prev => prev + 1);
+                setPage((prev) => prev + 1);
                 setHasMore(data.info.next !== null);
             } else {
                 setHasMore(false);
@@ -32,11 +31,14 @@ function CharacterList() {
         }
     };
 
-    // Assignment 4
+    // Assignment 5
+    useEffect(() => {
+        fetchCharacters();
+    }, []);
+
     const filteredCharacters = characters.filter((char) =>
         char.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
 
     return (
         <div className="character-list">
@@ -49,7 +51,9 @@ function CharacterList() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     aria-label="Search characters"
                 />
-                <button onClick={() => setSearchTerm('')} className="clear-button" aria-label="Clear search">Clear</button>
+                <button onClick={() => setSearchTerm('')} className="clear-button" aria-label="Clear search">
+                    Clear
+                </button>
             </div>
             <ul>
                 {filteredCharacters.map((char) => (
