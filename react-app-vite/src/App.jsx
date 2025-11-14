@@ -1,15 +1,13 @@
-// import "./App.css";
-import React from "react";
-import CharacterList from "./components/CharacterList";
-// import AboutMe from "./AboutMe";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header.jsx";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <CharacterList />
+    <div>
+      <Header />
+      <main>
+        <Outlet /> { }
+      </main>
     </div>
   );
 }
-
-export default App;

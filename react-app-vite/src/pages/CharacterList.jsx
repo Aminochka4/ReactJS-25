@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CharacterCard from "./CharacterCard";
-import "./CharacterList.css";
+import CharacterCard from "../components/CharacterCard";
+import "../pages/CharacterList.css";
 
 function CharacterList() {
     const [characters, setCharacters] = useState([]);
