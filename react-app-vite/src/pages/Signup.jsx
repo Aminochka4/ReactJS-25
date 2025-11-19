@@ -3,13 +3,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import "../styles/Auth.css";
 
-export default function Login() {
+export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,10 +17,10 @@ export default function Login() {
     setLoading(true);
     setError(null);
     try {
-      await login(email, password);
+      await signup(email, password);
       navigate("/profile");
     } catch (err) {
-      setError("Failed to login. Check email/password.");
+      setError("Failed to sign up.");
     } finally {
       setLoading(false);
     }
@@ -28,14 +28,14 @@ export default function Login() {
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2>Sign Up</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
         <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required />
-        <button type="submit" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
+        <button type="submit" disabled={loading}>{loading ? "Signing up..." : "Sign Up"}</button>
       </form>
-      <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      <p>Already have an account? <Link to="/login">Login</Link></p>
     </div>
   );
 }

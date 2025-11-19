@@ -1,5 +1,6 @@
 import React from "react";
 import "./CharacterCard.css";
+import { Link } from "react-router-dom";
 
 function CharacterCard({ character }) {
     return (
@@ -8,6 +9,8 @@ function CharacterCard({ character }) {
             <h3 className="text-card">{character.name}</h3>
             <p className="text-card">Status: {character.status}</p>
             <p className="text-card">Species: {character.species}</p>
+            <Link to={`/characters/${character.id}`} className="show-more-button"> Show More </Link>
+
         </li>
     );
 }
