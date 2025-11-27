@@ -1,40 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getCharacterById } from "../services/itemsService";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemById } from "../features/items/itemsSlice";
 import Spinner from "../components/Spinner";
 import ErrorBox from "../components/ErrorBox";
 import "./CharacterDetails.css";
 
 function CharacterDetails() {
     const { id } = useParams();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [character, setCharacter] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+
+    const { selectedItem, loadingItem, errorItem } = useSelector((state) => state.items);
 
     useEffect(() => {
-        const fetchCharacter = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const data = await getCharacterById(id);
-                setCharacter(data);
-            } catch (err) {
-                setError(err.message || "Something went wrong");
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchCharacter();
-    }, [id]);
+        dispatch(fetchItemById(id));
+    }, [id, dispatch]);
 
-    if (loading) return <Spinner />;
-    if (error) return <ErrorBox message={error} />;
-    if (!character) return <ErrorBox message="Character not found" />;
+    if (loadingItem) return <Spinner />;
+    if (errorItem) return <ErrorBox message={errorItem} />;
+    if (!selectedItem) return <ErrorBox message="Character not found" />;
+
+    const character = selectedItem;
 
     return (
         <div className="character-details-container">
             <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
+
             <div className="character-card-details">
                 <img src={character.image} alt={character.name} />
                 <div className="character-info">

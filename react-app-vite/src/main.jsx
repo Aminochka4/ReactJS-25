@@ -12,10 +12,12 @@ import CharacterList from './components/CharacterList.jsx';
 import CharacterDetails from './pages/CharacterDetails.jsx';
 import App from "./App.jsx";
 import { AuthProvider } from "./contexts/AuthContext";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 
 const router = createBrowserRouter([
-  {
+  { 
     path: "/",
     element: <App />,
     children: [
@@ -34,8 +36,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <Provider store={store}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </Provider>
   </StrictMode>
 );

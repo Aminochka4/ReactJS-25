@@ -13,7 +13,7 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //предотвращает перезагрузку поведения элемента (в этом случае форма)
     setLoading(true);
     setError(null);
     try {
